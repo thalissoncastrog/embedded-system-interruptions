@@ -10,6 +10,7 @@
 
 // Configurações dos pinos
 const uint ledR_pin = 13; // RED=> GPIO13
+
 const uint button_A = 5; // Botão A = 5
 const uint button_B = 6; // Botão B = 6
 
@@ -32,7 +33,7 @@ static volatile uint COUNTER = 0;
 // Variável global para armazenar a cor (Entre 0 e 255 para intensidade)
 uint8_t led_r = 0; // Intensidade do vermelho
 uint8_t led_g = 0; // Intensidade do verde
-uint8_t led_b = 200; // Intensidade do azul
+uint8_t led_b = 5; // Intensidade do azul
 
 bool led_number_0[NUM_PIXELS] = {
     0, 1, 1, 1, 0,
@@ -163,56 +164,61 @@ int main()
     }
 }
 
+// Função para enviar um pixel codificado no formato GRB (Green, Red, Blue)
+// para o periférico PIO (Programável I/O) da placa.
 static inline void put_pixel(uint32_t pixel_grb)
 {
+    // Envia o valor do pixel para a máquina de estado do PIO, deslocando 8 bits para a esquerda.
     pio_sm_put_blocking(pio0, 0, pixel_grb << 8u);
 }
 
+// Função para criar um valor de 32 bits a partir de componentes RGB separados.
 static inline uint32_t urgb_u32(uint8_t r, uint8_t g, uint8_t b)
 {
+    // Constrói um inteiro de 32 bits onde os componentes estão na ordem GRB.
     return ((uint32_t)(r) << 8) | ((uint32_t)(g) << 16) | (uint32_t)(b);
 }
 
+// Função que retorna um ponteiro para a representação em LED de um número de 0 a 9.
 bool* draw_number(int number)
 {
     switch (number)
     {
     case 0:
-        return led_number_0;
+        return led_number_0; // Retorna o padrão de LEDs para o número 0.
         break;
     case 1:
-        return led_number_1;
+        return led_number_1; // Retorna o padrão de LEDs para o número 1.
         break;
     case 2:
-        return led_number_2;
+        return led_number_2; // Retorna o padrão de LEDs para o número 2.
         break;
     case 3:
-        return led_number_3;
+        return led_number_3; // Retorna o padrão de LEDs para o número 3.
         break;
     case 4:
-        return led_number_4;
+        return led_number_4; // Retorna o padrão de LEDs para o número 4.
         break;
     case 5:
-        return led_number_5;
+        return led_number_5; // Retorna o padrão de LEDs para o número 5.
         break;
     case 6:
-        return led_number_6;
+        return led_number_6; // Retorna o padrão de LEDs para o número 6.
         break;
     case 7:
-        return led_number_7;
+        return led_number_7; // Retorna o padrão de LEDs para o número 7.
         break;
     case 8:
-        return led_number_8;
+        return led_number_8; // Retorna o padrão de LEDs para o número 8.
         break;
     case 9:
-        return led_number_9;
+        return led_number_9; // Retorna o padrão de LEDs para o número 9.
         break;    
     default:
-        return turn_off_all_leds;
+        return turn_off_all_leds; // Retorna um padrão que desliga todos os LEDs se o número for inválido.
         break;
     }
 }
-
 
 void set_one_led(uint8_t r, uint8_t g, uint8_t b)
 {
