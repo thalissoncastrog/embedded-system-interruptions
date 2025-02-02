@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/interruptions_counter.uf2'
+elf = 'build/interruptions_counter.elf'
