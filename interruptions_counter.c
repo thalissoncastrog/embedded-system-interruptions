@@ -67,11 +67,11 @@ bool led_number_3[NUM_PIXELS] = {
 };
 
 bool led_number_4[NUM_PIXELS] = {
-    0, 0, 1, 0, 0,
-    0, 0, 1, 0, 0,
-    0, 0, 1, 1, 1,
-    1, 0, 1, 0, 0,
-    0, 0, 1, 0, 1
+    1, 0, 0, 0, 0,
+    0, 0, 0, 0, 1,
+    1, 1, 1, 1, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1
 };
 
 bool led_number_5[NUM_PIXELS] = {
